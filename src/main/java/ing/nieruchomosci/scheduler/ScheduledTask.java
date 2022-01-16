@@ -33,24 +33,6 @@ public class ScheduledTask {
 		this.todoService = todoService;
 	}
 
-	/*
-	 * Cron expression is represented by six fields:
-	 *		second, minute, hour, day of month, month, day(s) of week
-	 *
-	 * 		(star) means match any
-	 * 		star/X means "every X"
-	 * 		? ("no specific value")
-	 * 
-	 * 		examples :
-	 * 		"0 0 * * * *" = the top of every hour of every day.
-	 * 		"star/10 * * * * *" = every ten seconds.
-	 * 		"0 0 8-10 * * *" = 8, 9 and 10 o'clock of every day.
-	 * 		"0 0 8,10 * * *" = 8 and 10 o'clock of every day.
-	 */
-	
-	// For example, "0 * * * * MON-FRI" means once per minute on weekdays(at the top of the minute - the 0th second). 
-	// @Scheduled(cron = "0 0 21 * * *")
-	// @Scheduled(cron = "0 * * * * *")
 	@Scheduled(cron = "0 */2 * * * *")
 	@Transactional
 	public void getTodosFromExternalService() {
@@ -63,9 +45,6 @@ public class ScheduledTask {
 			
 			ArrayNode jsonResponse = this.todoWebClient
 		      .get()
-		      //.uri("/todos")
-		      //.uri(uriBuilder -> uriBuilder.path("/todos/{id}").build(id))
-		      //.uri("/todos/1")
 		      .uri(uriBuilder -> uriBuilder.path("/todos").queryParam("userId", userId).build())
 		      .retrieve()
 		      .bodyToMono(ArrayNode.class)

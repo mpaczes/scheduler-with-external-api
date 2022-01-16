@@ -31,19 +31,16 @@ public class TodosController {
 		this.todoService = todoService;
 	}
 	
-	// URL -- /api/todos
 	@GetMapping("/todos")
 	public List<TodosDto> getAllTodos() {
 		return (List<TodosDto>) todoService.getAllTodos();
 	}
 	
-	// URL -- /api/todos/1
 	@GetMapping("/todos/{userId}")
 	public List<TodosDto> getTodosForUserId(@PathVariable("userId") Integer userId) {
 		return (List<TodosDto>) todoService.findByTodoUserId(userId);
 	}
 	
-	// URL -- /api/todos/dateRange?dateSince=202105011450&dateUntil=202109101625
 	@GetMapping("/todos/dateRange")
 	public List<TodosDto> getTodosBetweenDateRange(@RequestParam("dateSince") String dateSince,
 			@RequestParam("dateUntil") String dateUntil) throws ParseException {
@@ -53,7 +50,6 @@ public class TodosController {
 		return (List<TodosDto>) todoService.findAllByDownloadDateBetween(dateSinceConverted, dateUntilConverted);
 	}
 	
-	// URL -- /api/todos/countUserRecords?userId=1
 	@GetMapping("/todos/countUserRecords")
 	public CountersForUser countUserRecords(@RequestParam("userId") Integer userId) {
 		return todoService.countUserRecords(userId);

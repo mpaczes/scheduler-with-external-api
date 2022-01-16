@@ -15,7 +15,6 @@ public class TodosEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long dbRecordId;
-	// @Temporal(TemporalType.DATE)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date downloadDate;
 	private Integer todoUserId;
